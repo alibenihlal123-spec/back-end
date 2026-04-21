@@ -31,4 +31,11 @@ class UtilisatorController extends Controller
                 'user'=>$utilisator
             ]);
     }
+
+    public function index()
+    {
+        return response()->json([
+            'users' => Utilisator::all()
+        ]);
+    }
 }

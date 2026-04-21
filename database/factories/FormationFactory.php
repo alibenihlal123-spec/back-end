@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class FormationFactory extends Factory
 {
+    
     /**
      * Define the model's default state.
      *
@@ -18,7 +19,11 @@ class FormationFactory extends Factory
     {
         $list=['developement digital','AI','infstructure digital','mechanique'];
         return [
-            'title'=>$this->faker->randomElement($list)
+            'title'=>$this->faker->randomElement($list),
+            'description'=>$this->faker->text(150),
+            'duree'=>$this->faker->numberBetween(1,12),
+            'date_debut'=>$this->faker->date(),
+            'date_fin'=>$this->faker->date()
         ];
     }
 }

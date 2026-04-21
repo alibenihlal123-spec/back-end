@@ -12,11 +12,11 @@ class FormationController extends Controller
      */
     public function index()
     {
-       $formations = Formation::all();
-
-       return response()->json([
-        "fromations"=>$formations
-       ]);
+       $formations = Formation::with(['animateurs', 'themes'])->get();
+ 
+        return response()->json([
+         "formations"=>$formations
+        ]);
     }
 
     /**
@@ -34,7 +34,7 @@ class FormationController extends Controller
     {
         $data = $request->all();
 
-        Formation::created($data);
+        Formation::create($data);
 
         return response()->json([
             "created"=>"has been created"
@@ -65,7 +65,7 @@ class FormationController extends Controller
     {
         $id = request('formation');
         $data = $request->all();
-        $form =   Formation::find($id);
+        $form = Formation::find($id);
         $form->update($data);
         return response()->json([
             "updated"=>"has been updated"

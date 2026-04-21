@@ -24,7 +24,7 @@ class PivotFactory extends Factory
             'formation_id'=>Formation::inRandomOrder()->value('id'),
             'animater_id'=>Animater::inRandomOrder()->value('id'),
             'theme_id'=>Theme::inRandomOrder()->value('id'),
-            'participent_id'=>Participent::inRandomOrder()->value('id')
+            // 'participent_id'=>Participent::inRandomOrder()->value('id')
         ];
     }
 }

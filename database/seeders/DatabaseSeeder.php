@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Theme;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
         $this->call(FormationSeeder::class);
         $this->call(AnimaterSeeder::class);
@@ -25,9 +24,14 @@ class DatabaseSeeder extends Seeder
         $this->call(PivotSeeder::class);
         $this->call(AbcenseSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
+        $this->call(UtilisatorSeeder::class);
+        $this->call(UserSeeder::class);
+
+        User::firstOrCreate([
             'email' => 'test@example.com',
+        ], [
+            'name' => 'Test User',
+            'password' => bcrypt('password'),
         ]);
     }
 }

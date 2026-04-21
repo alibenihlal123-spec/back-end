@@ -17,7 +17,10 @@ class AnimaterFactory extends Factory
     public function definition(): array
     {
         return [
-            'nom'=>$this->faker->firstName()
+            'nom'=>$this->faker->firstName(),
+            'prenom'=>$this->faker->lastName(),
+            'email'=>$this->faker->email(),
+            'telephone'=>$this->faker->phoneNumber(),
         ];
     }
 }
