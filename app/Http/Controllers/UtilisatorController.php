@@ -10,15 +10,15 @@ class UtilisatorController extends Controller
 {
     public function login(Request $request){
             $request->validate([
-                'email'=>'required|email',
+                'username'=>'required|string',
                 'password'=>'required|string'
             ]);
 
-            $data = $request->only(['email','password']);
+            $data = $request->only(['username','password']);
 
             if(! Auth::attempt($data)){
                 return response()->json([
-                    'message'=>'invalid email or password'
+                    'message'=>'invalid username or password'
                 ],401);
             }
 

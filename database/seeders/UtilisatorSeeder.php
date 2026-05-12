@@ -13,6 +13,24 @@ class UtilisatorSeeder extends Seeder
      */
     public function run(): void
     {
+        Utilisator::create([
+            'username' => 'admin',
+            'password' => bcrypt('admin123'),
+            'role' => 'admin'
+        ]);
+
+        Utilisator::create([
+            'username' => 'trainer',
+            'password' => bcrypt('trainer123'),
+            'role' => 'formateur'
+        ]);
+
+        Utilisator::create([
+            'username' => 'client',
+            'password' => bcrypt('client123'),
+            'role' => 'client'
+        ]);
+
         Utilisator::factory(10)->create();
     }
 }

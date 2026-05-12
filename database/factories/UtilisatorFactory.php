@@ -18,7 +18,7 @@ class UtilisatorFactory extends Factory
     {
          $list = ['cdc','fA','fP'];
         return [
-            'email'=>$this->faker->unique()->email(),
+            'username'=>$this->faker->unique()->userName(),
             'password'=>$this->faker->unique()->password(8,11),
             'role'=>$this->faker->randomElement($list)
         ];
