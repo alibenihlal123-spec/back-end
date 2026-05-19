@@ -15,18 +15,21 @@ class UtilisatorSeeder extends Seeder
     {
         Utilisator::create([
             'username' => 'admin',
+            'email' => 'admin@example.com',
             'password' => bcrypt('admin123'),
             'role' => 'admin'
         ]);
 
         Utilisator::create([
             'username' => 'trainer',
+            'email' => 'trainer@example.com',
             'password' => bcrypt('trainer123'),
             'role' => 'formateur'
         ]);
 
         Utilisator::create([
             'username' => 'client',
+            'email' => 'client@example.com',
             'password' => bcrypt('client123'),
             'role' => 'client'
         ]);

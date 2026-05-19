@@ -14,7 +14,7 @@ class PivotController extends Controller
     public function index()
     {
         return response()->json([
-            'pivots' => pivot::all()
+            'pivots' => Pivot::all()
         ]);
     }
 
@@ -29,14 +29,12 @@ class PivotController extends Controller
             'theme_id' => 'required|exists:themes,id',
         ]);
 
-        // Create or update assignment for this combination
-        $pivot = pivot::updateOrCreate(
-            ['formation_id' => $validated['formation_id']],
-            [
-                'animater_id' => $validated['animater_id'],
-                'theme_id' => $validated['theme_id']
-            ]
-        );
+        // Create assignment for this combination if it doesn't exist
+        $pivot = Pivot::firstOrCreate([
+            'formation_id' => $validated['formation_id'],
+            'animater_id' => $validated['animater_id'],
+            'theme_id' => $validated['theme_id']
+        ]);
 
         return response()->json([
             'message' => 'Assignment saved successfully',
@@ -49,7 +47,7 @@ class PivotController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(pivot::find($id));
+        return response()->json(Pivot::find($id));
     }
 
     /**
@@ -57,7 +55,7 @@ class PivotController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pivot = pivot::find($id);
+        $pivot = Pivot::find($id);
         if (!$pivot) {
             return response()->json(['message' => 'Not found'], 404);
         }
@@ -87,7 +85,7 @@ class PivotController extends Controller
             'theme_id' => 'required',
         ]);
 
-        pivot::where($validated)->delete();
+        Pivot::where($validated)->delete();
 
         return response()->json(['message' => 'Assignment deleted successfully']);
     }

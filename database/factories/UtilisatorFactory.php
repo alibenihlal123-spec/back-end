@@ -19,7 +19,8 @@ class UtilisatorFactory extends Factory
          $list = ['cdc','fA','fP'];
         return [
             'username'=>$this->faker->unique()->userName(),
-            'password'=>$this->faker->unique()->password(8,11),
+            'email'=>$this->faker->unique()->safeEmail(),
+            'password'=>$this->faker->password(8,11), // also removed unique() from password since we dropped that constraint
             'role'=>$this->faker->randomElement($list)
         ];
     }

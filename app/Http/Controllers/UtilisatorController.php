@@ -14,15 +14,21 @@ class UtilisatorController extends Controller
                 'password'=>'required|string'
             ]);
 
-            $data = $request->only(['username','password']);
+            $usernameOrEmail = $request->input('username');
+            $password = $request->input('password');
 
-            if(! Auth::attempt($data)){
+            $utilisator = Utilisator::where('username', $usernameOrEmail)
+                ->orWhere('email', $usernameOrEmail)
+                ->first();
+
+            if (!$utilisator || !\Illuminate\Support\Facades\Hash::check($password, $utilisator->password)) {
                 return response()->json([
                     'message'=>'invalid username or password'
                 ],401);
             }
 
-            $utilisator = Auth::user();
+            Auth::login($utilisator);
+            $utilisator->load(['participent.formations', 'animater.formations']);
 
             $token = $utilisator->createToken('test')->plainTextToken;
 

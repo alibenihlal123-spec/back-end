@@ -11,4 +11,13 @@ class Participent extends Model
     public $timestamps = false;
     protected $guarded = [];
 
+    public function utilisator()
+    {
+        return $this->belongsTo(Utilisator::class);
+    }
+
+    public function formations()
+    {
+        return $this->belongsToMany(Formation::class, 'formation_participent');
+    }
 }

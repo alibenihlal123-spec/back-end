@@ -27,6 +27,7 @@ Route::get('animateurs',[AnimatorController::class,"index"]);
 
 Route::resource('pivot', PivotController::class);
 Route::delete('pivot', [PivotController::class, 'destroy']);
+Route::resource('animators', AnimatorController::class);
 
 Route::resource('participents', ParticipentController::class);
 
