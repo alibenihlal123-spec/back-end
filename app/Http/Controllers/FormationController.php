@@ -12,13 +12,28 @@ class FormationController extends Controller
      */
     public function index()
     {
-       $formations = Formation::with(['animateurs', 'themes'])->get();
+        $formations = Formation::with(['animateurs', 'themes'])->get();
  
         return response()->json([
-         "formations"=>$formations
+            "formations"=>$formations
         ]);
     }
 
+    public function formationsAnimateur($id)
+{
+    $formations = Formation::whereHas(
+        'animateurs',
+        function ($query) use ($id) {
+            $query->where('users.id', $id);
+        }
+    )
+    ->withCount('stagiaires')
+    ->get();
+
+    return response()->json([
+        'formations' => $formations
+    ]);
+}
     /**
      * Show the form for creating a new resource.
      */
